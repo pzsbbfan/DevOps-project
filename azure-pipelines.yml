@@ -4,19 +4,10 @@ trigger:
       - main
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: Default  # Use the pool where your self-hosted agent is configured
 
 steps:
 - script: |
-    echo "Hello, Azure DevOps Pipeline!"
-  displayName: 'Run a simple script'
-
-- script: |
-    echo "Checking current directory..."
-    ls -la
-  displayName: 'Debug: List current directory'
-
-- script: |
-    echo "Checking Maven version..."
-    mvn -version
-  displayName: 'Debug: Check Maven version'
+    echo "Running pipeline on self-hosted agent!"
+    mvn clean package
+  displayName: 'Build and Test'
