@@ -1,5 +1,4 @@
-package com.example.devops;
-
+import com.example.devops.SimpleAppDevOps;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
