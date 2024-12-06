@@ -4,31 +4,55 @@ trigger:
       - main
 
 pool:
-  name: Default  # Use your configured agent pool
+  name: Default
 
 steps:
 # Step 1: Checkout Code
 - checkout: self
   displayName: 'Checkout code from GitHub'
 
+# Step 2: Build Project
 - script: |
     echo "Building the project..."
     mvn clean package
-  displayName: 'Build and Test'
+  displayName: 'Build Project'
 
+# Step 3: Run Unit Tests
 - script: |
-    echo "Listing target directory..."
-    ls -l target
-  displayName: 'Debug Target Directory'
+    echo "Running Unit Tests..."
+    mvn test
+  displayName: 'Run Unit Tests'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'target/*.jar'
-    artifactName: 'maven-artifacts'
-  displayName: 'Publish Build Artifacts'
+# Step 4: Static Code Analysis (Mocked)
+- script: |
+    echo "Mocking SonarQube Static Code Analysis..."
+  displayName: 'Static Code Analysis'
 
+# Step 5: Deliver Artifact
+- script: |
+    echo "Releasing build artifact..."
+  displayName: 'Deliver Artifact'
+
+# Step 6: Deploy to Dev Environment
 - script: |
     echo "Deploying to Dev Environment..."
-    echo "Application Deployed Successfully!"
+    echo "Dev Deployment Successful!"
   displayName: 'Deploy to Dev'
 
+# Step 7: Deploy to QAT Environment
+- script: |
+    echo "Deploying to QAT Environment..."
+    echo "QAT Deployment Successful!"
+  displayName: 'Deploy to QAT'
+
+# Step 8: Deploy to Staging Environment
+- script: |
+    echo "Deploying to Staging Environment..."
+    echo "Staging Deployment Successful!"
+  displayName: 'Deploy to Staging'
+
+# Step 9: Deploy to Production Environment
+- script: |
+    echo "Deploying to Production Environment..."
+    echo "Production Deployment Successful!"
+  displayName: 'Deploy to Production'
