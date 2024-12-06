@@ -21,7 +21,14 @@ steps:
     ls -l target
   displayName: 'Debug Target Directory'
 
-# Step 2: Debugging
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'target/*.jar'
+    artifactName: 'maven-artifacts'
+  displayName: 'Publish Build Artifacts'
+
 - script: |
-    echo "Testing minimal pipeline"
-  displayName: 'Test Pipeline'
+    echo "Deploying to Dev Environment..."
+    echo "Application Deployed Successfully!"
+  displayName: 'Deploy to Dev'
+
