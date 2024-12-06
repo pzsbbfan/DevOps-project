@@ -4,27 +4,10 @@ trigger:
       - main
 
 pool:
-  name: Default  # Ensure this matches your self-hosted agent pool
+  name: Default  # Use the pool where your self-hosted agent is configured
 
 steps:
-# Step 1: Checkout Code
-- task: Checkout@1
-  displayName: 'Checkout code from GitHub'
-
-# Step 2: Compile Java Code
 - script: |
-    echo "Compiling Java files..."
-    javac -d out src/main/java/com/example/devops/*.java
-  displayName: 'Compile Java Files'
-
-# Step 3: Run Tests (if applicable)
-- script: |
-    echo "Running placeholder tests..."
-  displayName: 'Run Placeholder Tests'
-
-# Step 4: Publish Artifacts
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'out'
-    artifactName: 'java-compiled-files'
-  displayName: 'Publish Build Artifacts'
+    echo "Running pipeline on self-hosted agent!"
+    mvn clean package
+  displayName: 'Build and Test'
