@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.HashMap;
 
 public class SimpleAppDevOps extends JFrame {
-    private HashMap<String, String> users = new HashMap<>();
+    HashMap<String, String> users = new HashMap<>();
     private CardLayout cardLayout = new CardLayout();
     private JPanel mainPanel;
 
