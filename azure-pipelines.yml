@@ -10,3 +10,13 @@ steps:
 - script: |
     echo "Hello, Azure DevOps Pipeline!"
   displayName: 'Run a simple script'
+
+- script: |
+    echo "Checking current directory..."
+    ls -la
+  displayName: 'Debug: List current directory'
+
+- script: |
+    echo "Checking Maven version..."
+    mvn -version
+  displayName: 'Debug: Check Maven version'
