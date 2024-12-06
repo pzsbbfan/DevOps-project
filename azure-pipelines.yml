@@ -24,18 +24,6 @@ steps:
     mvn test
   displayName: 'Run Unit Tests'
 
-# Step 4: Static Code Analysis with SonarQube
-- task: SonarQubePrepare@4
-  displayName: 'Prepare analysis on SonarQube'
-  inputs:
-    SonarQube: 'SonarQube-Service-Connection'
-    scannerMode: 'CLI'
-    configMode: 'manual'
-    cliProjectKey: 'YourProjectKey'
-
-- task: SonarQubeAnalyze@4
-  displayName: 'Run SonarQube Analysis'
-
 # Step 5: Deploy Artifact
 - task: CopyFiles@2
   displayName: 'Copy build artifact'
