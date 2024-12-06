@@ -7,25 +7,6 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-# Step 1: Checkout code
-- task: Checkout@1
-  displayName: 'Checkout code from GitHub'
-
-# Step 2: Build Stage
 - script: |
-    echo "Building the project..."
-    mvn clean package
-  displayName: 'Build the project'
-
-# Step 3: Run Unit Tests
-- script: |
-    echo "Running Unit Tests..."
-    mvn test
-  displayName: 'Run Unit Tests'
-
-# Step 4: Deploy Artifact
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish build artifacts'
-  inputs:
-    pathToPublish: 'target/*.jar'
-    artifactName: 'drop'
+    echo "Hello, Azure DevOps Pipeline!"
+  displayName: 'Run a simple script'
