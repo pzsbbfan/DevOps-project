@@ -33,6 +33,11 @@ steps:
     echo "Releasing build artifact..."
   displayName: 'Deliver Artifact'
 
+- script: |
+    echo "Generating Code Coverage Report..."
+    mvn verify
+  displayName: 'Generate Code Coverage Report'
+
 # Step 6: Deploy to Dev Environment
 - script: |
     echo "Deploying to Dev Environment..."
