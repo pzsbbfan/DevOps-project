@@ -4,10 +4,10 @@ trigger:
       - main
 
 pool:
-  name: Default  # Ensure this matches your self-hosted agent's pool name
+  name: Default  # Ensure this matches your self-hosted agent pool
 
 steps:
-# Step 1: Checkout code
+# Step 1: Checkout Code
 - task: Checkout@1
   displayName: 'Checkout code from GitHub'
 
@@ -15,17 +15,16 @@ steps:
 - script: |
     echo "Compiling Java files..."
     javac -d out src/main/java/com/example/devops/*.java
-  displayName: 'Compile Java files'
+  displayName: 'Compile Java Files'
 
-# Step 3: Run Placeholder Unit Tests
+# Step 3: Run Tests (if applicable)
 - script: |
-    echo "Running placeholder unit tests..."
-    echo "Tests completed successfully!"
-  displayName: 'Run unit tests (placeholder)'
+    echo "Running placeholder tests..."
+  displayName: 'Run Placeholder Tests'
 
-# Step 4: Publish Build Artifacts
+# Step 4: Publish Artifacts
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish build artifacts'
   inputs:
     pathToPublish: 'out'
-    artifactName: 'compiled-java-files'
+    artifactName: 'java-compiled-files'
+  displayName: 'Publish Build Artifacts'
