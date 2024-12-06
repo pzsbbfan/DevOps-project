@@ -4,58 +4,9 @@ trigger:
       - main
 
 pool:
-  name: Default  # Use the pool where your self-hosted agent is configured
+  name: Default  # Your agent pool
 
 steps:
-# Step 1: Checkout Code
-- task: Checkout@1
-  displayName: 'Checkout code from GitHub'
-
-# Step 2: Debug Files Before Build
 - script: |
-    echo "Listing files in the working directory before build..."
-    ls -R
-  displayName: 'Debug Files Before Build'
-
-# Step 3: Build and Package
-- script: |
-    echo "Building the project..."
-    mvn clean package
-  displayName: 'Build and Test'
-
-# Step 4: Run Unit Tests
-- script: |
-    echo "Running Unit Tests..."
-    mvn test
-  displayName: 'Run Unit Tests'
-
-# Step 5: Publish Build Artifacts
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: 'target/*.jar'
-    artifactName: 'maven-artifacts'
-  displayName: 'Publish Build Artifacts'
-
-# Step 6: Deploy to Dev Environment
-- script: |
-    echo "Deploying to Dev Environment..."
-    echo "Application Deployed Successfully!"
-  displayName: 'Deploy to Dev'
-
-# Step 7: Deploy to QAT Environment
-- script: |
-    echo "Deploying to QAT Environment..."
-    echo "Application Deployed Successfully!"
-  displayName: 'Deploy to QAT'
-
-# Step 8: Deploy to Staging Environment
-- script: |
-    echo "Deploying to Staging Environment..."
-    echo "Application Deployed Successfully!"
-  displayName: 'Deploy to Staging'
-
-# Step 9: Deploy to Production Environment
-- script: |
-    echo "Deploying to Production Environment..."
-    echo "Application Deployed Successfully!"
-  displayName: 'Deploy to Production'
+    echo "Testing simple pipeline"
+  displayName: 'Test Pipeline'
