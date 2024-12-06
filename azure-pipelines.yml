@@ -1,0 +1,49 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+# Step 1: Checkout code
+- task: Checkout@1
+  displayName: 'Checkout code from GitHub'
+
+# Step 2: Build Stage
+- task: Maven@3
+  displayName: 'Build the project'
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
+
+# Step 3: Run Unit Tests
+- script: |
+    echo "Running Unit Tests"
+    mvn test
+  displayName: 'Run Unit Tests'
+
+# Step 4: Static Code Analysis with SonarQube
+- task: SonarQubePrepare@4
+  displayName: 'Prepare analysis on SonarQube'
+  inputs:
+    SonarQube: 'SonarQube-Service-Connection'
+    scannerMode: 'CLI'
+    configMode: 'manual'
+    cliProjectKey: 'YourProjectKey'
+
+- task: SonarQubeAnalyze@4
+  displayName: 'Run SonarQube Analysis'
+
+# Step 5: Deploy Artifact
+- task: CopyFiles@2
+  displayName: 'Copy build artifact'
+  inputs:
+    contents: '**/target/*.jar'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish build artifacts'
+  inputs:
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
