@@ -38,6 +38,13 @@ steps:
     mvn verify
   displayName: 'Generate Code Coverage Report'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'target/site/jacoco'
+    artifactName: 'CodeCoverageReport'
+  displayName: 'Publish Code Coverage Report'
+
+
 # Step 6: Deploy to Dev Environment
 - script: |
     echo "Deploying to Dev Environment..."
