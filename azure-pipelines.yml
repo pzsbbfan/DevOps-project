@@ -12,26 +12,20 @@ steps:
   displayName: 'Checkout code from GitHub'
 
 # Step 2: Build Stage
-- task: Maven@3
+- script: |
+    echo "Building the project..."
+    mvn clean package
   displayName: 'Build the project'
-  inputs:
-    mavenPomFile: 'pom.xml'
-    goals: 'clean package'
 
 # Step 3: Run Unit Tests
 - script: |
-    echo "Running Unit Tests"
+    echo "Running Unit Tests..."
     mvn test
   displayName: 'Run Unit Tests'
 
-# Step 5: Deploy Artifact
-- task: CopyFiles@2
-  displayName: 'Copy build artifact'
-  inputs:
-    contents: '**/target/*.jar'
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
-
+# Step 4: Deploy Artifact
 - task: PublishBuildArtifacts@1
   displayName: 'Publish build artifacts'
   inputs:
-    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    pathToPublish: 'target/*.jar'
+    artifactName: 'drop'
