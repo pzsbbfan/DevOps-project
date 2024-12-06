@@ -4,9 +4,14 @@ trigger:
       - main
 
 pool:
-  name: Default  # Your agent pool
+  name: Default  # Use your configured agent pool
 
 steps:
+# Step 1: Checkout Code
+- checkout: self
+  displayName: 'Checkout code from GitHub'
+
+# Step 2: Debugging
 - script: |
-    echo "Testing simple pipeline"
+    echo "Testing minimal pipeline"
   displayName: 'Test Pipeline'
