@@ -11,6 +11,16 @@ steps:
 - checkout: self
   displayName: 'Checkout code from GitHub'
 
+- script: |
+    echo "Building the project..."
+    mvn clean package
+  displayName: 'Build and Test'
+
+- script: |
+    echo "Listing target directory..."
+    ls -l target
+  displayName: 'Debug Target Directory'
+
 # Step 2: Debugging
 - script: |
     echo "Testing minimal pipeline"
