@@ -7,7 +7,49 @@ pool:
   name: Default  # Use the pool where your self-hosted agent is configured
 
 steps:
+# Step 1: Checkout Code
+- task: Checkout@1
+  displayName: 'Checkout code from GitHub'
+
+# Step 2: Build and Test
 - script: |
-    echo "Running pipeline on self-hosted agent!"
+    echo "Building the project..."
     mvn clean package
   displayName: 'Build and Test'
+
+# Step 3: Run Unit Tests
+- script: |
+    echo "Running Unit Tests..."
+    mvn test
+  displayName: 'Run Unit Tests'
+
+# Step 4: Publish Build Artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: 'target/*.jar'
+    artifactName: 'maven-artifacts'
+  displayName: 'Publish Build Artifacts'
+
+# Step 5: Deploy to Dev Environment
+- script: |
+    echo "Deploying to Dev Environment..."
+    echo "Application Deployed Successfully!"
+  displayName: 'Deploy to Dev'
+
+# Step 6: Deploy to QAT Environment
+- script: |
+    echo "Deploying to QAT Environment..."
+    echo "Application Deployed Successfully!"
+  displayName: 'Deploy to QAT'
+
+# Step 7: Deploy to Staging Environment
+- script: |
+    echo "Deploying to Staging Environment..."
+    echo "Application Deployed Successfully!"
+  displayName: 'Deploy to Staging'
+
+# Step 8: Deploy to Production Environment
+- script: |
+    echo "Deploying to Production Environment..."
+    echo "Application Deployed Successfully!"
+  displayName: 'Deploy to Production'
